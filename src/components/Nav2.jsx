@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import styled from 'styled-components';
 import { BsList } from "react-icons/bs";
 import { PiMagnifyingGlass } from "react-icons/pi";
@@ -7,22 +7,51 @@ import NavBotonera from "./NavBotonera";
 
 export default function Nav2()
 {
-const ContenedorNav = styled.div`
-    display: flex;
-    flex-direction: row;
-    background: red;
-`;
+    const [disp, setDisp] = useState('none');
 
-const Titulo = styled.h1`
-    color: yellow
+    function pivotMenu()
+    {
+        if(disp==='none'){
+            setDisp('flex');
+        }else{
+            setDisp('none');
+        }
+    }
+
+    const ContenedorNav2 = styled.div`
+    display: flex;
+    flex-direction: column;
+    background: red;
+
+    @media (min-width: 361px) {
+        display: none;
+    }
+    `;
+
+    const NavBotoneraContainer = styled.div`
+        display: ${disp};
+    `;
+
+    const Iconos = styled.div`
+    display: flex;
+    justify-content: space-around;
 `;
 
     return (
-        <ContenedorNav>
-            <NavBotonera direction='column'/>
-            <div><LiaHomeSolid size={24} color='#F5ABB0' /></div>
-            <div><PiMagnifyingGlass size={24} color='#F5ABB0' /></div>
-            <div><BsList size={24} color='#F5ABB0' /></div>
-        </ContenedorNav>
+        <ContenedorNav2>
+            <NavBotoneraContainer display={disp}>
+                <NavBotonera 
+                    direction='column'
+                    size='12.5rem'
+                />                
+            </NavBotoneraContainer>
+        
+
+            <Iconos>
+                <LiaHomeSolid size={24} color='#F5ABB0' />
+                <PiMagnifyingGlass size={24} color='#F5ABB0' />
+                <BsList size={24} color='#F5ABB0' onClick={pivotMenu} />            
+            </Iconos>
+        </ContenedorNav2>
     )
 }

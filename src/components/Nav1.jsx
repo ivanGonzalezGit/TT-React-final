@@ -8,16 +8,15 @@ export default function Nav1()
 {
 
 const ContenedorNav1 = styled.div`
-@media(min-width: 800px)
+@media(max-width: 360px)
 {
     display: none;
 }
 `;
 
-
     return (
         <ContenedorNav1>
-            <NavBotonera />
+            <NavBotonera direction={'row'} size='5rem'/>
         </ContenedorNav1>
     )
 }

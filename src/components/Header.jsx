@@ -18,6 +18,7 @@ const Logo = styled.img`
 const Titulo = styled.h1`
     margin: auto;
     background: red;
+    font-family: josefin-sanz, sans-serif;
 `
 
 

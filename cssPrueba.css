@@ -1,0 +1,7 @@
+.prueba
+{
+    display: flex;
+    justify-content: end;
+    font-family: sans-serif;
+    align-items: start;
+}
