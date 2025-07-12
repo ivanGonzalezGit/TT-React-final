@@ -24,19 +24,16 @@ const Titulo = styled.h1`
 
 export default function Header()
 {
-    const [contadorCarrito, setContadorCarrito] = useState(0);
+
     return (
         <ContenedorHeader>
             <Logo src="./images/logoTodoBaratitoColor.svg" alt="logo">
             
             </Logo>
             <Titulo>
-                Todo Baratito
+                Footer
             </Titulo>
-            <div>
-                <div>{contadorCarrito}</div>
-                <PiShoppingCartSimple size={24} color='#F5ABB0' />
-            </div>
+
         </ContenedorHeader>    
     )
 }

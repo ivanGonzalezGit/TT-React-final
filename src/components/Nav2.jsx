@@ -4,6 +4,7 @@ import { BsList } from "react-icons/bs";
 import { PiMagnifyingGlass } from "react-icons/pi";
 import { LiaHomeSolid } from "react-icons/lia";
 import NavBotonera from "./NavBotonera";
+import { Link } from "react-router-dom";
 
 export default function Nav2()
 {
@@ -26,7 +27,14 @@ export default function Nav2()
     @media (min-width: 361px) {
         display: none;
     }
+    
+    @media (max-width: 361px) {
+        :root{
+        font-size: 10px;
+        }
+    }
     `;
+
 
     const NavBotoneraContainer = styled.div`
         display: ${disp};
@@ -48,7 +56,9 @@ export default function Nav2()
         
 
             <Iconos>
-                <LiaHomeSolid size={24} color='#F5ABB0' />
+                <Link to={'/'}>
+                    <LiaHomeSolid size={24} color='#F5ABB0' />                
+                </Link>
                 <PiMagnifyingGlass size={24} color='#F5ABB0' />
                 <BsList size={24} color='#F5ABB0' onClick={pivotMenu} />            
             </Iconos>

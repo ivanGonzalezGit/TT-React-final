@@ -1,31 +1,43 @@
-import { useState } from 'react';
-import Header from './components/Header';
-import Nav1 from './components/Nav1';
-import Nav2 from './components/Nav2';
-import styled from 'styled-components';
+import React, { useState } from 'react';
+import { BrowserRouter as Router, Routes, Route} from 'react-router-dom';
+import Home from './views/Home';
+import Login from './views/Login';
+import Registry from './views/Registry';
+import Products from './views/Products';
+import Cart from './views/Cart';
+import Contact from './views/Contact';
+import Admin from './views/Admin';
+import RutaProtegida from './components/rutaProtegida';
+import NotFound from './views/NotFound';
+
 
 function App() {
-  const [count, setCount] = useState(0)
 
-const MainContiner = styled.div`
-  :root
-  {
-    fonti-size: 16px;
-  }
-
-  *{
-  margin: 0;
-  padding: 0;
-  font-family: roboto, sans-serif;
-  }
-`;
+  const [isAuthenticated, setIsAuthenticated] = useState(true);
 
   return (
-    <MainContiner>
-      <Header />
-      <Nav1 /> 
-      <Nav2 />
-    </MainContiner>
+    <div>
+      <Routes>
+        <Route path='/' element={<Home />} />
+        <Route path='/login' element={<Login />} />
+        <Route path='/admin' element={
+                                      <RutaProtegida isAuthenticated={isAuthenticated}>
+                                        <Admin />
+                                      </RutaProtegida>
+                                    } />
+        <Route path='/registry' element={<Registry />} />
+        <Route path='/products/:id' element={<Products />} />
+
+        <Route path='/cart' element={
+                                      <RutaProtegida isAuthenticated={isAuthenticated}>
+                                        <Cart />
+                                      </RutaProtegida>
+                                    } />
+
+        <Route path='/contact' element={<Contact />} />
+        <Route path='*' element={<NotFound />} />
+      </Routes> 
+    </div>
   )
 }
 

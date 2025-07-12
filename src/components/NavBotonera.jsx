@@ -1,6 +1,7 @@
 import React from "react";
 import styled from "styled-components";
 import NavBoton from "./NavBoton";
+import { Link } from "react-router-dom";
 
 
 export default function NavBotonera({ direction, size}) {
@@ -18,11 +19,21 @@ export default function NavBotonera({ direction, size}) {
 
     return (
         <NavBotonera direction={direction} size={size}>
-            <NavBoton cont='Login' estilo={estilo} />
-            <NavBoton cont='Registrarse' estilo={estilo} />
-            <NavBoton cont='Carrito' estilo={estilo} />
-            <NavBoton cont='Productos' estilo={estilo} />
-            <NavBoton cont='Contacto' estilo={estilo} />
+            <Link to={'/'}>
+                <NavBoton cont='Home' estilo={estilo} />
+            </Link>
+            
+            <Link to={'/login'}>
+                <NavBoton cont='Login' estilo={estilo} />
+            </Link>
+
+            <Link to={'/Cart'}>
+                <NavBoton cont='Carrito' estilo={estilo} />
+            </Link>
+            
+            <Link to={'/contact'}>
+                <NavBoton cont='Contacto' estilo={estilo} />
+            </Link>
         </NavBotonera>
     );
 }

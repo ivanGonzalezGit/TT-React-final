@@ -4,8 +4,6 @@ import Nav1 from '../components/Nav1';
 import Nav2 from '../components/Nav2';
 import styled from 'styled-components';
 import Footer from '../components/Footer';
-import { Link } from "react-router-dom";
-import NavBoton from "../components/NavBoton";
 
 
 const MainContiner = styled.div`
@@ -21,24 +19,13 @@ const MainContiner = styled.div`
   }
 `;
 
-export default function Login()
+export default function Contact()
 {
-
-  const estilo = {
-      color: 'white',
-      background: 'red',
-      borderRadius: '3px',
-      width: '12.5rem'
-  };
-
   return (
     <MainContiner>
         <Header />
         <Nav1 />
-        <h1>Login</h1>
-        <Link to={'/registry'}>
-          <NavBoton cont='Registro' estilo={estilo} />
-        </Link>
+        <h1>Contacto</h1>
         <Footer />
         <Nav2 />
     </MainContiner>

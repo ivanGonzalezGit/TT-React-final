@@ -3,7 +3,6 @@ import styled from 'styled-components';
 import NavBotonera from "./NavBotonera";
 
 
-
 export default function Nav1()
 {
 
