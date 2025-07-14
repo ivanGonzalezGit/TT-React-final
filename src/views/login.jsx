@@ -1,4 +1,6 @@
-import React, { useState } from 'react';
+import React, { useState } from 'react'; 
+import { useNavigate } from 'react-router-dom'; 
+import { useAuthContext } from '../context/AuthContext'; 
 import Header from '../components/Header';
 import Nav1 from '../components/Nav1';
 import Nav2 from '../components/Nav2';
@@ -24,6 +26,22 @@ const MainContiner = styled.div`
 export default function Login()
 {
 
+  const [usuario, setUsuario] = useState(''); 
+  const [password, setPassword] = useState(''); 
+  const { login } = useAuthContext(); 
+  const navigate = useNavigate(); 
+ 
+  const handleSubmit = (e) => { 
+    e.preventDefault(); 
+    // Simulación de autenticación 
+    if (usuario === 'admin' && password === '1234') { 
+      login(usuario); 
+      navigate('/admin'); 
+    } else { 
+      alert('Credenciales incorrectas'); 
+    } 
+  }; 
+
   const estilo = {
       color: 'white',
       background: 'red',
@@ -36,6 +54,27 @@ export default function Login()
         <Header />
         <Nav1 />
         <h1>Login</h1>
+
+        <form onSubmit={handleSubmit}> 
+          <h2>Iniciar sesión</h2> 
+          <div> 
+            <label>Usuario:</label> 
+            <input 
+              type="text" 
+              value={usuario} 
+              onChange={(e) => setUsuario(e.target.value)} 
+            /> 
+          </div> 
+          <div> 
+            <label>Contraseña:</label> 
+            <input 
+              type="password" 
+              value={password} 
+              onChange={(e) => setPassword(e.target.value)} 
+            /> 
+          </div> 
+          <button type="submit">Iniciar sesión</button> 
+        </form>
         <Link to={'/registry'}>
           <NavBoton cont='Registro' estilo={estilo} />
         </Link>
