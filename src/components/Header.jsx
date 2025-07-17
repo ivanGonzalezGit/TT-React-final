@@ -1,6 +1,8 @@
 import React, {useState} from "react";
 import styled from 'styled-components';
 import { PiShoppingCartSimple } from "react-icons/pi";
+import { useContext } from 'react';
+import { CartContext } from '../context/CartContext';
 
 const ContenedorHeader = styled.div`
     margin: auto;
@@ -24,7 +26,8 @@ const Titulo = styled.h1`
 
 export default function Header()
 {
-    const [contadorCarrito, setContadorCarrito] = useState(0);
+    const { cart } = useContext(CartContext);
+
     return (
         <ContenedorHeader>
             <Logo src="./images/logoTodoBaratitoColor.svg" alt="logo">
@@ -34,7 +37,7 @@ export default function Header()
                 Todo Baratito
             </Titulo>
             <div>
-                <div>{contadorCarrito}</div>
+                <div>{cart.length}</div>
                 <PiShoppingCartSimple size={24} color='#F5ABB0' />
             </div>
         </ContenedorHeader>    

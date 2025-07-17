@@ -7,6 +7,10 @@ export default function Nav1()
 {
 
 const ContenedorNav1 = styled.div`
+
+width: 100%;
+height: auto;
+
 @media(max-width: 360px)
 {
     display: none;

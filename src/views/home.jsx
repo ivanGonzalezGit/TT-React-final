@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import Header from '../components/Header';
 import Nav1 from '../components/Nav1';
 import Nav2 from '../components/Nav2';
@@ -6,6 +6,7 @@ import styled from 'styled-components';
 import Footer from '../components/Footer';
 import Producto from './vistAgregarCarrito';
 import Cart from './Cart';
+import Gallery from '../components/Gallery';
 
 
 
@@ -22,29 +23,13 @@ const MainContiner = styled.div`
   }
 `;
 
-export default function Home()
-{
-
-   const productos = [
- { id: 1, nombre: 'Producto 1', precio: 100 },
- { id: 2, nombre: 'Producto 2', precio: 200 },
- { id: 3, nombre: 'Producto 3', precio: 300 },
- ];
+export default function Home() {
 
   return (
     <MainContiner>
         <Header />
         <Nav1 />
-         <div>
-            <h1>Tienda Online</h1>
-            <div style={{ display: 'flex', 
-                          justifyContent:'space-between' }}>
-              <div>
-                <h2>Productos</h2>
-                {productos.map((producto) => (<Producto key={producto.id} producto={producto} />))}
-              </div>
-            </div>
-          </div>
+          <Gallery />
         <Footer />
         <Nav2 />
     </MainContiner>

@@ -4,6 +4,7 @@ import Nav1 from '../components/Nav1';
 import Nav2 from '../components/Nav2';
 import styled from 'styled-components';
 import Footer from '../components/Footer';
+import FormularioProducto from '../components/FormularioProducto';
 
 
 const MainContiner = styled.div`
@@ -16,16 +17,16 @@ const MainContiner = styled.div`
   margin: 0;
   padding: 0;
   font-family: roboto, sans-serif;
-  }
-`;
+  }`;
 
-export default function Admin()
-{
+export default function Admin() {
+
   return (
     <MainContiner>
         <Header />
         <Nav1 />
         <h1>Admin</h1>
+        <FormularioProducto />
         <Footer />        
         <Nav2 />
     </MainContiner>

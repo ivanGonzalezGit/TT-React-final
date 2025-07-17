@@ -73,7 +73,8 @@ export default function Login()
               onChange={(e) => setPassword(e.target.value)} 
             /> 
           </div> 
-          <button type="submit">Iniciar sesión</button> 
+
+          <NavBoton type="submit" cont='Iniciar Sesión' estilo={estilo} />
         </form>
         <Link to={'/registry'}>
           <NavBoton cont='Registro' estilo={estilo} />

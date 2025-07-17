@@ -11,6 +11,7 @@ import RutaProtegida from './components/rutaProtegida';
 import NotFound from './views/NotFound';
 
 
+
 function App() {
 
   const [isAuthenticated, setIsAuthenticated] = useState(false);
@@ -27,13 +28,7 @@ function App() {
                                     } />
         <Route path='/registry' element={<Registry />} />
         <Route path='/products/:id' element={<Products />} />
-
-        <Route path='/cart' element={
-                                      <RutaProtegida isAuthenticated={isAuthenticated}>
-                                        <Cart />
-                                      </RutaProtegida>
-                                    } />
-
+        <Route path='/cart' element={<Cart />} />
         <Route path='/contact' element={<Contact />} />
         <Route path='*' element={<NotFound />} />
       </Routes> 
