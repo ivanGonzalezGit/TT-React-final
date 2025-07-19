@@ -2,7 +2,6 @@ import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom'; 
 import { useAuthContext } from '../context/AuthContext'; 
 import Header from '../components/Header';
-import Nav1 from '../components/Nav1';
 import Nav2 from '../components/Nav2';
 import styled from 'styled-components';
 import Footer from '../components/Footer';
@@ -52,7 +51,6 @@ export default function Login()
   return (
     <MainContiner>
         <Header />
-        <Nav1 />
         <h1>Login</h1>
 
         <form onSubmit={handleSubmit}> 

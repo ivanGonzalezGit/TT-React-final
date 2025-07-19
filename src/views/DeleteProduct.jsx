@@ -6,6 +6,7 @@ import Footer from '../components/Footer';
 import Producto from './vistAgregarCarrito';
 import Cart from './Cart';
 import Gallery from '../components/Gallery';
+import DeleteGallery from '../components/DeleteGallery';
 
 
 
@@ -27,7 +28,8 @@ export default function Home() {
   return (
     <MainContiner>
         <Header />
-          <Gallery />
+          <h2>Borrar Producto</h2>
+          <DeleteGallery />
         <Footer />
         <Nav2 />
     </MainContiner>

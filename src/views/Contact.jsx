@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 import Header from '../components/Header';
-import Nav1 from '../components/Nav1';
 import Nav2 from '../components/Nav2';
 import styled from 'styled-components';
 import Footer from '../components/Footer';
@@ -24,7 +23,6 @@ export default function Contact()
   return (
     <MainContiner>
         <Header />
-        <Nav1 />
         <h1>Contacto</h1>
         <Footer />
         <Nav2 />

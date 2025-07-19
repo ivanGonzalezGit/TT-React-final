@@ -36,9 +36,9 @@ export default function Gallery({ agregarAlCarrito }) {
                     <p>{product.price} USD</p>
                     <Link to={`/products/${product.id}`}>
                         <button
-                            style={{ padding: "10px 15px", backgroundColor: "#007bff", color: "white", border: "none", borderRadius: "4px", cursor: "pointer" }}
+                            style={{ padding: "10px 15px", backgroundColor: "yellow", color: "#010101", border: "none", borderRadius: "4px", cursor: "pointer" }}
                         >
-                            Ver Detalle
+                            Editar Producto
                         </button>            
                     </Link>
 

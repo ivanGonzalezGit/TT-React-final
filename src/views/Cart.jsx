@@ -1,6 +1,5 @@
 import React, { useState, useContext } from 'react';
 import Header from '../components/Header';
-import Nav1 from '../components/Nav1';
 import Nav2 from '../components/Nav2';
 import styled from 'styled-components';
 import Footer from '../components/Footer';
@@ -27,7 +26,6 @@ export default function Cart() {
 
     <MainContiner>
         <Header />
-        <Nav1 />
             <div>
               <h1>Carrito de Compras</h1>
               {cart.length > 0 ? (

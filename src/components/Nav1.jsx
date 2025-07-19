@@ -8,6 +8,8 @@ export default function Nav1()
 
 const ContenedorNav1 = styled.div`
 
+display: flex;
+align-items: end;
 width: 100%;
 height: auto;
 

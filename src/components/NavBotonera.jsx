@@ -11,9 +11,9 @@ export default function NavBotonera({ direction, size}) {
     `;
     
     const estilo = {
-        color: 'white',
-        background: 'red',
-        borderRadius: '3px',
+        color: '#F5ABB0',
+        background: '#62162F',
+        border: 'none',
         width: size
     };
 

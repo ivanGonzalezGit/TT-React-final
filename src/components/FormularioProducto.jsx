@@ -3,30 +3,40 @@ import NavBoton from './NavBoton';
 
 function FormularioProducto({ onAgregar }) {
   const [errores, setErrores] = useState({});
-  const [producto, setProducto] = useState({
-    nombre: '',
-    precio: '',
-    descripcion: '',
+  const [product, setProduct] = useState({
+    name: '',
+    price: '',
+    description: '',
+    image: '',
+    category: ''
   });
 
   const handleChange = (e) => {
     const { name, value } = e.target;
-    setProducto({ ...producto, [name]: value });
+    setProduct({ ...product, [name]: value });
   };
 
   const validarFormulario = () => {
     const nuevosErrores = {};
 
-    if (!producto.nombre.trim()) {
-      nuevosErrores.nombre = 'El nombre es obligatorio.';
+    if (!product.name.trim()) {
+      nuevosErrores.name = 'El nombre es obligatorio.';
     }
 
-    if (!producto.precio || producto.precio <= 0) {
-      nuevosErrores.precio = 'El precio debe ser mayor a 0.';
+    if (!product.price || product.price <= 0) {
+      nuevosErrores.price = 'El precio debe ser mayor a 0.';
     }
 
-    if (!producto.descripcion.trim() || producto.descripcion.length < 10) {
-      nuevosErrores.descripcion = 'La descripción debe tener al menos 10 caracteres.';
+    if (!product.description.trim() || product.description.length < 10) {
+      nuevosErrores.description = 'La descripción debe tener al menos 10 caracteres.';
+    }
+
+    if (!product.image.trim()) {
+      nuevosErrores.image = 'Debe ingresar una URL de una foto.';
+    }
+
+    if (!product.category.trim()) {
+      nuevosErrores.category = 'El producto debe pertenecer a una categoría';
     }
 
     setErrores(nuevosErrores);
@@ -36,57 +46,79 @@ function FormularioProducto({ onAgregar }) {
   const handleSubmit = (e) => {
     e.preventDefault();
     if (validarFormulario()) {
-      onAgregar(producto);
-      setProducto({ nombre: '', precio: '', descripcion: '' });
+      onAgregar(product);
+      setProduct({ name: '', price: '', description: '', image: '', category: '' });
       setErrores({});
     }
   };
 
   const estilo = {
-    color: 'white',
-    background: 'red',
-    borderRadius: '3px',
-    width: '12.5rem',
+    color: '#F5ABB0',
+    background: '#62162F',
+    border: 'none',
+    width: '12.5rem'
   };
 
   return (
-    <form onSubmit={handleSubmit}>
+    <form style={{display: 'flex', flexDirection: 'column', justifyContent: 'center'}} onSubmit={handleSubmit}>
       <h2>Agregar Producto</h2>
       
       <div>
         <label>Nombre:</label>
         <input
           type="text"
-          name="nombre"
-          value={producto.nombre}
+          name="name"
+          value={product.name}
           onChange={handleChange}
           required
         />
-        {errores.nombre && <p style={{ color: 'red' }}>{errores.nombre}</p>}
+        {errores.name && <p style={{ color: 'red' }}>{errores.name}</p>}
       </div>
 
       <div>
         <label>Precio:</label>
         <input
           type="number"
-          name="precio"
-          value={producto.precio}
+          name="price"
+          value={product.price}
           onChange={handleChange}
           required
           min="0"
         />
-        {errores.precio && <p style={{ color: 'red' }}>{errores.precio}</p>}
+        {errores.price && <p style={{ color: 'red' }}>{errores.price}</p>}
       </div>
 
       <div>
         <label>Descripción:</label>
         <textarea
-          name="descripcion"
-          value={producto.descripcion}
+          name="description"
+          value={product.description}
           onChange={handleChange}
           required
         />
-        {errores.descripcion && <p style={{ color: 'red' }}>{errores.descripcion}</p>}
+        {errores.description && <p style={{ color: 'red' }}>{errores.description}</p>}
+      </div>
+
+        <div>
+        <label>Imágen:</label>
+        <textarea
+          name="image"
+          value={product.image}
+          onChange={handleChange}
+          required
+        />
+        {errores.image && <p style={{ color: 'red' }}>{errores.image}</p>}
+      </div>
+
+        <div>
+        <label>Categoría:</label>
+        <textarea
+          name="category"
+          value={product.category}
+          onChange={handleChange}
+          required
+        />
+        {errores.category && <p style={{ color: 'red' }}>{errores.category}</p>}
       </div>
 
       <NavBoton type="submit" cont="Agregar Producto" estilo={estilo} />

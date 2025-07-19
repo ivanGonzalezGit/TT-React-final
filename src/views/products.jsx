@@ -1,6 +1,5 @@
 import React, { useState, useEffect, useContext } from 'react';
 import Header from '../components/Header';
-import Nav1 from '../components/Nav1';
 import Nav2 from '../components/Nav2';
 import styled from 'styled-components';
 import Footer from '../components/Footer';
@@ -32,7 +31,7 @@ export default function Products() {
   const { addCart } = useContext(CartContext);
 
   useEffect(() => {
-    fetch(`https://686a90e8e559eba9087056bc.mockapi.io/product/product/${id}`)
+    fetch(`https://686a90e8e559eba9087056bc.mockapi.io/api/product/${id}`)
       .then(res => res.json())
       .then(res => {
         setProduct(res);
@@ -69,7 +68,6 @@ export default function Products() {
   return (
     <MainContiner>
       <Header />
-      <Nav1 />
       <section style={{ display: "flex", gap: "10px", justifyContent: "center", marginTop: "20px", flexWrap: "wrap" }}>
         <div key={product.id} style={{
           border: "1px solid #ccc",

@@ -22,7 +22,8 @@ export default function Nav2()
     const ContenedorNav2 = styled.div`
     display: flex;
     flex-direction: column;
-    background: red;
+    justify-content: flex-end;
+    background: #62162F;
 
     @media (min-width: 361px) {
         display: none;
@@ -38,6 +39,8 @@ export default function Nav2()
 
     const NavBotoneraContainer = styled.div`
         display: ${disp};
+        flex-direction: column;
+        align-items: end;
     `;
 
     const Iconos = styled.div`

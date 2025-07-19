@@ -5,7 +5,7 @@ import styled from 'styled-components';
 import Footer from '../components/Footer';
 import Producto from './vistAgregarCarrito';
 import Cart from './Cart';
-import Gallery from '../components/Gallery';
+import EditGallery from '../components/EditGallery';
 
 
 
@@ -27,7 +27,8 @@ export default function Home() {
   return (
     <MainContiner>
         <Header />
-          <Gallery />
+        <h2>Editar Producto</h2>
+          <EditGallery />
         <Footer />
         <Nav2 />
     </MainContiner>
