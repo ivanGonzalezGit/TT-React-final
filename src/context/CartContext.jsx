@@ -20,8 +20,12 @@ const addCart = (product) => {
  setCart([]);
  };
 
+ const removeFromCart = (id) => {
+  setCart(prev => prev.filter(producto => producto.id !== id));
+};
+
  return (
- <CartContext.Provider value={{ cart, addCart, emptyCart }}>
+ <CartContext.Provider value={{ cart, addCart, emptyCart, removeFromCart }}>
     {children}
  </CartContext.Provider>
  );

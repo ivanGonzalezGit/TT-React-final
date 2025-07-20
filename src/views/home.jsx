@@ -6,7 +6,7 @@ import Footer from '../components/Footer';
 import Producto from './vistAgregarCarrito';
 import Cart from './Cart';
 import Gallery from '../components/Gallery';
-
+import  UncontrolledExample from '../components/Carousel';
 
 
 const MainContiner = styled.div`
@@ -27,6 +27,7 @@ export default function Home() {
   return (
     <MainContiner>
         <Header />
+          <UncontrolledExample />
           <Gallery />
         <Footer />
         <Nav2 />

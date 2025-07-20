@@ -1,9 +1,10 @@
 import React, { useState, useEffect, useContext } from 'react';
 import Header from '../components/Header';
+import Nav1 from '../components/Nav1';
 import Nav2 from '../components/Nav2';
 import styled from 'styled-components';
 import Footer from '../components/Footer';
-import { useParams } from 'react-router-dom';
+import { redirect, useParams, useNavigate } from 'react-router-dom';
 import Swal from 'sweetalert2';
 import withReactContent from 'sweetalert2-react-content';
 import MySpinner from '../components/MySpinner';
@@ -29,6 +30,7 @@ export default function Products() {
   const [error, setError] = useState(null);
   const { id } = useParams();
   const { addCart } = useContext(CartContext);
+  const navigate = useNavigate();
 
   useEffect(() => {
     fetch(`https://686a90e8e559eba9087056bc.mockapi.io/api/product/${id}`)
@@ -43,24 +45,42 @@ export default function Products() {
       });
   }, [id]);
 
-  const handleAddToCart = () => {
-    MySwal.fire({
-      title: <p>¿Agregar <strong>{product.name}</strong> al carrito?</p>,
-      icon: 'question',
-      showCancelButton: true,
-      confirmButtonText: 'Agregar',
-      cancelButtonText: 'Cancelar'
-    }).then((result) => {
-      if (result.isConfirmed) {
-        addCart(product);
-        console.log(`${product.name} agregado al carrito`);
-        
-      }
-    });
-  };
+const handleAddToCart = () => {
+  MySwal.fire({
+    title: <p>¿Agregar <strong>{product.name}</strong> al carrito?</p>,
+    icon: 'question',
+    showCancelButton: true,
+    confirmButtonText: 'Agregar',
+    cancelButtonText: 'Cancelar'
+  }).then((result) => {
+    if (result.isConfirmed) {
+      addCart(product);
+      
+      MySwal.fire({
+        title: <p>¡Producto agregado!</p>,
+        text: `${product.name} fue agregado correctamente al carrito.`,
+        icon: 'success',
+        confirmButtonText: 'Aceptar'
+      }).then(() => {
+        navigate('/');
+      });
+    }
+    else{
+      navigate('/');
+    }
+  });
+};
 
   if (loading) {
-    return <MySpinner />;
+    return (
+        <MainContiner>
+          <Header />
+          <Nav1 />
+          <MySpinner />
+          <Footer />
+          <Nav2 />
+        </MainContiner>
+    )
   }
 
   if (error) return <p>{error}</p>;

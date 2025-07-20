@@ -35,7 +35,7 @@ export default function Admin() {
 
 const agregarProducto = async (producto) => {
  try {const respuesta = await
-    fetch(`https://686a90e8e559eba9087056bc.mockapi.io/api/product/${id}`, {
+    fetch(`https://686a90e8e559eba9087056bc.mockapi.io/api/product/`, {
     method: 'POST',
     headers: {
                 'Content-Type': 'application/json',
