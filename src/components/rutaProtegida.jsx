@@ -1,6 +1,6 @@
 import React from "react";
 import { Navigate } from "react-router-dom";
-import { useAuthContext } from '../context/AuthContext';
+import { useAuthContext } from '../context/authContext';
 
 export default function RutaProtegida({isAuthenticated, children})
 {
