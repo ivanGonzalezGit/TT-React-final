@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { useAuthContext } from '../context/AuthContext';
+import { useAuthContext } from '../context/authContext';
 import Header from '../components/Header';
 import Nav2 from '../components/Nav2';
 import styled from 'styled-components';
