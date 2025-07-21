@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from "react-router-dom";
 import 'bootstrap/dist/css/bootstrap.min.css';
-import MySpinner from './MySpinner';
+import MySpinner from '../components/MySpinner';
 
-export default function Gallery({ agregarAlCarrito }) {
+export default function EditGallery() {
     const [data, setData] = useState([]);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
@@ -34,7 +34,7 @@ export default function Gallery({ agregarAlCarrito }) {
                     <img src={product.image} alt={product.name} style={{ width: "100%", height: "200px", borderRadius: "4px", objectFit: "cover" }} />
                     <h3>{product.name}</h3>
                     <p>{product.price} USD</p>
-                    <Link to={`/products/${product.id}`}>
+                    <Link to={`/edit/${product.id}`}>
                         <button
                             style={{ padding: "10px 15px", backgroundColor: "yellow", color: "#010101", border: "none", borderRadius: "4px", cursor: "pointer" }}
                         >

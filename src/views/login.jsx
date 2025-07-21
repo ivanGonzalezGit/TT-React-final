@@ -30,16 +30,31 @@ export default function Login()
   const { login } = useAuthContext(); 
   const navigate = useNavigate(); 
  
-  const handleSubmit = (e) => { 
-    e.preventDefault(); 
-    // Simulación de autenticación 
-    if (usuario === 'admin' && password === '1234') { 
-      login(usuario); 
-      navigate('/admin'); 
-    } else { 
-      alert('Credenciales incorrectas'); 
-    } 
-  }; 
+const handleSubmit = async (e) => {
+  e.preventDefault();
+
+  try {
+    const res = await fetch('https://686a90e8e559eba9087056bc.mockapi.io/api/admin');
+    const usuarios = await res.json();
+
+    const existeUsuario = usuarios.some(u => u.name === usuario && u.pass === password);
+
+    if (!existeUsuario) {
+      alert('Usuario o contraseña incorrectos');
+      navigate('/registry');
+      return;
+    }
+
+    localStorage.setItem('usuario', usuario);
+
+    login(usuario);
+
+    navigate('/admin');
+
+  } catch (error) {
+    console.error('Error al iniciar sesión:', error); 
+  }
+};
 
   const estilo = {
       color: 'white',

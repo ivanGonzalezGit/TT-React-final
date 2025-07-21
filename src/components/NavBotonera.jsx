@@ -31,8 +31,8 @@ export default function NavBotonera({ direction, size}) {
                 <NavBoton cont='Carrito' estilo={estilo} />
             </Link>
             
-            <Link to={'/contact'}>
-                <NavBoton cont='Contacto' estilo={estilo} />
+            <Link to={'/admin'}>
+                <NavBoton cont='Administrador' estilo={estilo} />
             </Link>
         </NavBotonera>
     );

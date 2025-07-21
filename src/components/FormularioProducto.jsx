@@ -84,6 +84,7 @@ function FormularioProducto({ onAgregar }) {
           onChange={handleChange}
           required
           min="0"
+          step="0.01" 
         />
         {errores.price && <p style={{ color: 'red' }}>{errores.price}</p>}
       </div>
