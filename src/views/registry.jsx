@@ -1,36 +1,58 @@
 import React, { useState } from 'react'; 
-import { Navigate, useNavigate } from 'react-router-dom'; 
+import { useNavigate } from 'react-router-dom'; 
 import Header from '../components/Header';
 import Nav2 from '../components/Nav2';
 import styled from 'styled-components';
 import Footer from '../components/Footer';
 import NavBoton from "../components/NavBoton";
 
-
 const MainContiner = styled.div`
-  :root
-  {
-    fonti-size: 16px;
-  }
-
-  *{
-  margin: 0;
-  padding: 0;
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  width: 100%;
+  background-color: #F1F1F1;
   font-family: roboto, sans-serif;
-  }
 `;
 
+const Content = styled.div`
+  margin: 2rem 0;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+`;
 
-export default function Registry()
-{
+const FormWrapper = styled.form`
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  background: white;
+  padding: 2rem;
+  border-radius: 8px;
+  box-shadow: 0 0 10px rgba(0,0,0,0.1);
+  min-width: 320px;
+`;
+
+const InputGroup = styled.div`
+  display: flex;
+  flex-direction: column;
+`;
+
+const Label = styled.label`
+  margin-bottom: 0.25rem;
+  font-weight: bold;
+`;
+
+const Input = styled.input`
+  padding: 0.5rem;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+`;
+
+export default function Registry() {
   const navigate = useNavigate();
-
-  const estilo = {
-    color: 'white',
-    background: 'red',
-    borderRadius: '3px',
-    width: '12.5rem'
-  };
 
   const [user, setUser] = useState({ 
     name: '', 
@@ -38,82 +60,91 @@ export default function Registry()
   }); 
 
   const handleChange = (e) => { 
-  const { name, value } = e.target; 
-  setUser({ ...user, [name]: value }); 
+    const { name, value } = e.target; 
+    setUser({ ...user, [name]: value }); 
   }; 
 
-const handleSubmit = async (e) => { 
-  e.preventDefault(); 
+  const handleSubmit = async (e) => { 
+    e.preventDefault(); 
 
-  try {
-    const res = await fetch('https://686a90e8e559eba9087056bc.mockapi.io/api/admin');
-    const usuarios = await res.json();
+    try {
+      const res = await fetch('https://686a90e8e559eba9087056bc.mockapi.io/api/admin');
+      const usuarios = await res.json();
 
-    const existeUsuario = usuarios.some(u => u.name === user.name);
+      const existeUsuario = usuarios.some(u => u.name === user.name);
 
-    if (existeUsuario) {
-      alert('El nombre de usuario ya está registrado. Elegí otro.');
-      return; 
+      if (existeUsuario) {
+        alert('El nombre de usuario ya está registrado. Elegí otro.');
+        return; 
+      }
+
+      const response = await fetch('https://686a90e8e559eba9087056bc.mockapi.io/api/admin', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(user)
+      });
+
+      if (!response.ok) throw new Error('Error al registrar usuario');
+
+      const data = await response.json();
+      console.log('Usuario registrado:', data);
+
+      setUser({ name: '', pass: '' });
+      alert('Usuario registrado exitosamente');
+      navigate('/login');
+      
+    } catch (error) {
+      console.error(error);
+      alert('Ocurrió un error al registrar el usuario');
     }
+  };
 
-    const response = await fetch('https://686a90e8e559eba9087056bc.mockapi.io/api/admin', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify(user)
-    });
-
-    if (!response.ok) throw new Error('Error al registrar usuario');
-
-    const data = await response.json();
-    console.log('Usuario registrado:', data);
-
-    setUser({ name: '', pass: '' });
-    alert('Usuario registrado exitosamente');
-    navigate('/login');
-    
-  } catch (error) {
-    console.error(error);
-    alert('Ocurrió un error al registrar el usuario');
-  }
-};
-
+  const estilo = {
+    color: 'white',
+    background: '#30966C',
+    borderRadius: '3px',
+    width: '12.5rem',
+    border: 'none'
+  };
 
   return (
     <MainContiner>
-        <Header />
+      <Header />
 
-        <form onSubmit={handleSubmit}> 
+      <Content>
+        <h1>Registro</h1>
+
+        <FormWrapper onSubmit={handleSubmit}>
           <h2>Registro de Administrador</h2> 
 
-          <div> 
-            <label>Usuario:</label> 
-            <input 
+          <InputGroup> 
+            <Label>Usuario:</Label> 
+            <Input 
               type="text" 
-              name='name'
+              name="name"
               value={user.name} 
               onChange={handleChange} 
-              required
+              required 
             /> 
-          </div> 
+          </InputGroup> 
 
-          <div> 
-            <label>Contraseña:</label> 
-            <input 
-              type="password"
-              name='pass' 
+          <InputGroup> 
+            <Label>Contraseña:</Label> 
+            <Input 
+              type="password" 
+              name="pass" 
               value={user.pass} 
               onChange={handleChange} 
-              required
+              required 
             /> 
-          </div> 
+          </InputGroup> 
 
-          <NavBoton type="submit" cont='Registrar Usuario' estilo={estilo} />
-        </form>
+          <NavBoton type="submit" cont="Registrar Usuario" estilo={estilo} />
+        </FormWrapper>
+      </Content>
 
-        <Footer />
-        <Nav2 />
+      <Footer />
+      <Nav2 />
     </MainContiner>
-  )
+  );
 }

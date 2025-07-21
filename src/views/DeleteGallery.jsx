@@ -1,7 +1,24 @@
 import React, { useState, useEffect } from 'react';
+import Header from '../components/Header';
+import Nav2 from '../components/Nav2';
+import styled from 'styled-components';
+import Footer from '../components/Footer';
 import { Link } from "react-router-dom";
 import 'bootstrap/dist/css/bootstrap.min.css';
 import MySpinner from '../components/MySpinner';
+
+const MainContiner = styled.div`
+  :root
+  {
+    fonti-size: 16px;
+  }
+
+  *{
+  margin: 0;
+  padding: 0;
+  font-family: roboto, sans-serif;
+  }
+`;
 
 export default function DeleteGallery() {
     const [data, setData] = useState([]);
@@ -28,6 +45,8 @@ export default function DeleteGallery() {
     if (error) return <p>{error}</p>;
 
     return (
+        <MainContiner>
+        <Header />
         <section style={{ display: "flex", gap: "10px", justifyContent: "center", marginTop: "20px", flexWrap: "wrap" }}>
             {data.map((product) => (
                 <div key={product.id} style={{ border: "1px solid #ccc", padding: "20px", width: "200px", textAlign: "center", borderRadius: "8px" }}>
@@ -45,5 +64,8 @@ export default function DeleteGallery() {
                 </div>
             ))}
         </section>
+        <Footer />
+        <Nav2 />
+        </MainContiner>
     );
 }

@@ -1,10 +1,8 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import Header from '../components/Header';
 import Nav2 from '../components/Nav2';
 import styled from 'styled-components';
 import Footer from '../components/Footer';
-import Producto from './vistAgregarCarrito';
-import Cart from './Cart';
 import Gallery from '../components/Gallery';
 import  UncontrolledExample from '../components/Carousel';
 

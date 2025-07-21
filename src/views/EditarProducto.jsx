@@ -1,8 +1,66 @@
-import React, { useEffect, useState, useContext } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
+import Header from '../components/Header';
+import Footer from '../components/Footer';
+import Nav2 from '../components/Nav2';
 import NavBoton from '../components/NavBoton';
+import styled from 'styled-components';
 
-function FormularioProducto({ onAgregar }) {
+
+const MainContiner = styled.div`
+  :root
+  {
+    fonti-size: 16px;
+  }
+
+  *{
+  margin: 0;
+  padding: 0;
+  font-family: roboto, sans-serif;
+  }
+`;
+
+const FormWrapper = styled.form`
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  background: white;
+  padding: 2rem;
+  border-radius: 8px;
+  box-shadow: 0 0 10px rgba(0,0,0,0.1);
+  min-width: 320px;
+`;
+
+const InputGroup = styled.div`
+  display: flex;
+  flex-direction: column;
+`;
+
+const Label = styled.label`
+  margin-bottom: 0.25rem;
+  font-weight: bold;
+`;
+
+const Input = styled.input`
+  padding: 0.5rem;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+`;
+
+const Textarea = styled.textarea`
+  padding: 0.5rem;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  resize: vertical;
+`;
+
+const ErrorText = styled.p`
+  color: red;
+  font-size: 0.85rem;
+  margin-top: 0.25rem;
+`;
+
+export default function FormularioProducto() {
   const { id } = useParams();
   const navigate = useNavigate();
   const [product, setProduct] = useState({
@@ -58,7 +116,7 @@ function FormularioProducto({ onAgregar }) {
     }
 
     if (!product.category.trim()) {
-      nuevosErrores.category = 'El producto debe pertenecer a una categoría';
+      nuevosErrores.category = 'El producto debe pertenecer a una categoría.';
     }
 
     setErrores(nuevosErrores);
@@ -71,14 +129,12 @@ function FormularioProducto({ onAgregar }) {
 
     try {
       if (id) {
-
         await fetch(`https://686a90e8e559eba9087056bc.mockapi.io/api/product/${id}`, {
           method: 'PUT',
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify(product),
         });
       } else {
-
         await fetch('https://686a90e8e559eba9087056bc.mockapi.io/api/product', {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
@@ -86,7 +142,7 @@ function FormularioProducto({ onAgregar }) {
         });
       }
 
-      navigate('/'); 
+      navigate('/admin');
     } catch (err) {
       console.error('Error al guardar:', err);
     }
@@ -96,49 +152,53 @@ function FormularioProducto({ onAgregar }) {
   if (error) return <p>{error}</p>;
 
   const estilo = {
-    color: '#F5ABB0',
+    color: 'white',
     background: '#62162F',
-    border: 'none',
-    width: '12.5rem'
+    borderRadius: '3px',
+    width: '12.5rem',
+    border: 'none'
   };
 
   return (
-    <form style={{ display: 'flex', flexDirection: 'column', justifyContent: 'center' }} onSubmit={handleSubmit}>
-      <h2>{id ? 'Editar Producto' : 'Agregar Producto'}</h2>
+    <MainContiner>
+    <Header />
+      <FormWrapper onSubmit={handleSubmit}>
+        <h2>{id ? 'Editar Producto' : 'Agregar Producto'}</h2>
 
-      <div>
-        <label>Nombre:</label>
-        <input type="text" name="name" value={product.name} onChange={handleChange} required />
-        {errores.name && <p style={{ color: 'red' }}>{errores.name}</p>}
-      </div>
+        <InputGroup>
+          <Label>Nombre:</Label>
+          <Input type="text" name="name" value={product.name} onChange={handleChange} required />
+          {errores.name && <ErrorText>{errores.name}</ErrorText>}
+        </InputGroup>
 
-      <div>
-        <label>Precio:</label>
-        <input type="number" name="price" value={product.price} onChange={handleChange} required min="0" step="0.01" />
-        {errores.price && <p style={{ color: 'red' }}>{errores.price}</p>}
-      </div>
+        <InputGroup>
+          <Label>Precio:</Label>
+          <Input type="number" name="price" value={product.price} onChange={handleChange} required min="0" step="0.01" />
+          {errores.price && <ErrorText>{errores.price}</ErrorText>}
+        </InputGroup>
 
-      <div>
-        <label>Descripción:</label>
-        <textarea name="description" value={product.description} onChange={handleChange} required />
-        {errores.description && <p style={{ color: 'red' }}>{errores.description}</p>}
-      </div>
+        <InputGroup>
+          <Label>Descripción:</Label>
+          <Textarea name="description" value={product.description} onChange={handleChange} required />
+          {errores.description && <ErrorText>{errores.description}</ErrorText>}
+        </InputGroup>
 
-      <div>
-        <label>Imagen:</label>
-        <input type="text" name="image" value={product.image} onChange={handleChange} required />
-        {errores.image && <p style={{ color: 'red' }}>{errores.image}</p>}
-      </div>
+        <InputGroup>
+          <Label>Imagen (URL):</Label>
+          <Input type="text" name="image" value={product.image} onChange={handleChange} required />
+          {errores.image && <ErrorText>{errores.image}</ErrorText>}
+        </InputGroup>
 
-      <div>
-        <label>Categoría:</label>
-        <input type="text" name="category" value={product.category} onChange={handleChange} required />
-        {errores.category && <p style={{ color: 'red' }}>{errores.category}</p>}
-      </div>
+        <InputGroup>
+          <Label>Categoría:</Label>
+          <Input type="text" name="category" value={product.category} onChange={handleChange} required />
+          {errores.category && <ErrorText>{errores.category}</ErrorText>}
+        </InputGroup>
 
-      <NavBoton type="submit" cont={id ? 'Guardar Cambios' : 'Agregar Producto'} estilo={estilo} />
-    </form>
+        <NavBoton type="submit" cont={id ? 'Guardar Cambios' : 'Agregar Producto'} estilo={estilo} />
+      </FormWrapper>
+    <Footer />
+    <Nav2 />
+    </MainContiner>  
   );
 }
-
-export default FormularioProducto;
